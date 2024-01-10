@@ -1,0 +1,52 @@
+.timer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 39rem;
+    background-color: white;
+    color: rgb(75, 190, 96);
+
+
+    margin: 2rem auto 0 auto;
+    border-radius: 30px;
+  }
+  
+  .input-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .input-container input {
+    width: 50px;
+    margin: 5px;
+    padding: 5px;
+    text-align: center;
+    background-color: transparent;
+    color: rgb(75, 190, 96);
+    border: 1px solid rgb(75, 190, 96);
+    border-radius: 15px;
+  }
+  
+  .button-container button {
+    margin: 5px;
+    background-color: rgb(134, 199, 133);
+    color: white;
+    border: 1px solid rgb(75, 190, 96); /* 선의 두께와 종류 추가 */
+    border-radius: 15px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+
+  .button-container button:hover {
+    color: rgb(134, 199, 133);
+    background-color:white;
+    border: 1px solid rgb(75, 190, 96); /* 선의 두께와 종류 추가 */
+  }
+  
+  .timer-display {
+    font-size: 7em;
+    margin-top: 2px;
+    color: rgb(134, 199, 133);
+  }
