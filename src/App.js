@@ -4,10 +4,10 @@ import ToDoInsert from './components/ToDoInsert';
 import TodoList from './components/TodoList';
 import TodoTemplate from './components/ToDoTemplate';
 import Timer from './components/Timer';
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 function App() {
   const [todos, setTodos] = useState(() => {
-    // localStorage에서 데이터를 불러옵니다.
     const storedTodos = localStorage.getItem('todos');
     return storedTodos ? JSON.parse(storedTodos) : [
       {
@@ -40,19 +40,18 @@ function App() {
   const nextId = useRef(4);
 
   useEffect(() => {
-    // todos가 변경될 때마다 localStorage에 저장합니다.
     localStorage.setItem('todos', JSON.stringify(todos));
   }, [todos]);
 
   const onInsertToggle = useCallback(() => {
     if (selectedTodo) {
-      setSelectedTodo((selectedTodo) => null);
+      setSelectedTodo(null);
     }
     setInsertToggle((prev) => !prev);
   }, [selectedTodo]);
 
   const onChangeSelectedTodo = (todo) => {
-    setSelectedTodo((selectedTodo) => todo);
+    setSelectedTodo(todo);
   };
 
   const onInsert = useCallback(
@@ -94,28 +93,38 @@ function App() {
   }, []);
 
   return (
-    <>
-      <Timer />
-      <TodoTemplate>
-        <ToDoInsert onInsert={onInsert} />
-        <TodoList
-          todos={todos}
-          onToggle={onToggle}
-          onRemove={onRemove}
-          onChangeSelectedTodo={onChangeSelectedTodo}
-          onInsertToggle={onInsertToggle}
+    <BrowserRouter>
+      <Routes>
+        
+        <Route
+          path="/"
+          element={
+            <>
+              <Timer />
+              <TodoTemplate>
+                <ToDoInsert onInsert={onInsert} />
+                <TodoList
+                  todos={todos}
+                  onToggle={onToggle}
+                  onRemove={onRemove}
+                  onChangeSelectedTodo={onChangeSelectedTodo}
+                  onInsertToggle={onInsertToggle}
+                />
+                {insertToggle && (
+                  <ToDoEdit
+                    onInsert={onInsert}
+                    selectedTodo={selectedTodo}
+                    onInsertToggle={onInsertToggle}
+                    onUpdate={onUpdate}
+                    insertToggle={insertToggle}
+                  />
+                )}
+              </TodoTemplate>
+            </>
+          }
         />
-        {insertToggle && (
-          <ToDoEdit
-            onInsert={onInsert}
-            selectedTodo={selectedTodo}
-            onInsertToggle={onInsertToggle}
-            onUpdate={onUpdate}
-            insertToggle={insertToggle}
-          />
-        )}
-      </TodoTemplate>
-    </>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
