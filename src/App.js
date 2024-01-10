@@ -4,9 +4,11 @@ import ToDoInsert from './components/ToDoInsert';
 import TodoList from './components/TodoList';
 import TodoTemplate from './components/ToDoTemplate';
 import Timer from './components/Timer';
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link, useNavigate } from "react-router-dom";
 
 function App() {
+
+
   const [todos, setTodos] = useState(() => {
     const storedTodos = localStorage.getItem('todos');
     return storedTodos ? JSON.parse(storedTodos) : [
@@ -93,6 +95,8 @@ function App() {
   }, []);
 
   return (
+
+    
     <BrowserRouter>
       <Routes>
         
@@ -100,7 +104,7 @@ function App() {
           path="/"
           element={
             <>
-              <Timer />
+             <Timer />
               <TodoTemplate>
                 <ToDoInsert onInsert={onInsert} />
                 <TodoList
