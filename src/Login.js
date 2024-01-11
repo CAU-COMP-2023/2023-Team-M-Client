@@ -18,7 +18,7 @@ const App = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ username: loginUsername, password: loginPassword }),
+        body: JSON.stringify({ user: loginUsername, pwd: loginPassword }),
       });
 
       if (response.ok) {
@@ -39,7 +39,7 @@ const App = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ username: signupUsername, password: signupPassword, name: signupName, email: signupEmail }),
+        body: JSON.stringify({ user: signupUsername, pwd: signupPassword, name: signupName }),
       });
 
       if (response.ok) {
