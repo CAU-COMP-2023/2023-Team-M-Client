@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import './Login.css';
-import EcotimeLogo from './ecotime 로고.jpg';
+import EcotimeLogo from './ecotimelogo.jpg';
 
-const App = () => {
+import { Link } from "react-router-dom";
+
+
+const Login = () => {
   const [loginUsername, setLoginUsername] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
   const [signupUsername, setSignupUsername] = useState('');
@@ -77,9 +80,11 @@ const App = () => {
               value={loginPassword}
               onChange={(e) => setLoginPassword(e.target.value)}
             />
+            <Link to ="/">
             <button type="button" onClick={handleLogin}>
               로그인
             </button>
+            </Link>
           </>
         ) : (
           <>           
@@ -127,4 +132,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Login;

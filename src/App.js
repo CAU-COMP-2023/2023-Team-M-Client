@@ -4,6 +4,7 @@ import ToDoInsert from './components/ToDoInsert';
 import TodoList from './components/TodoList';
 import TodoTemplate from './components/ToDoTemplate';
 import Timer from './components/Timer';
+import Login from './Login'
 import { BrowserRouter, Routes, Route, Link, useNavigate } from "react-router-dom";
 
 function App() {
@@ -104,6 +105,9 @@ function App() {
           path="/"
           element={
             <>
+            <Link to="/Login">
+              <button className="이건 다른거임">로그인 이동</button>
+            </Link>
              <Timer />
               <TodoTemplate>
                 <ToDoInsert onInsert={onInsert} />
@@ -127,6 +131,8 @@ function App() {
             </>
           }
         />
+
+        <Route path="/Login" element={<Login />} />
       </Routes>
     </BrowserRouter>
   );
