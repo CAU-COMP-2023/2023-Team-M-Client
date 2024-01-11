@@ -16,7 +16,7 @@ const Login = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch('백엔드 로그인 주소', {
+      const response = await fetch('http://comp-backend-env.eba-vujcmart.ap-northeast-2.elasticbeanstalk.com/auth', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
