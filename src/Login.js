@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Login.css';
 import EcotimeLogo from './ecotimelogo.jpg';
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 const Login = () => {
@@ -13,6 +13,8 @@ const Login = () => {
   const [signupName, setSignupName] = useState('');
   const [signupEmail, setSignupEmail] = useState(''); 
   const [isLoginMode, setIsLoginMode] = useState(true); 
+  const navigate=useNavigate();
+
 
   const handleLogin = async () => {
     try {
@@ -27,8 +29,11 @@ const Login = () => {
       if (response.ok) {
         const userData = await response.json();
         console.log('로그인 성공:', userData);
+
+        navigate('/');
       } else {
         console.log('로그인 실패');
+        alert("아이디 혹은 비밀번호를 확인하세요");
       }
     } catch (error) {
       console.error('로그인 중 오류 발생:', error);
@@ -42,12 +47,14 @@ const Login = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ user: signupUsername, pwd: signupPassword, name: signupName }),
+        body: JSON.stringify({ user: signupUsername, pwd: signupPassword, name: signupName, email:signupEmail }),
       });
 
       if (response.ok) {
         const userData = await response.json();
         console.log('회원가입 성공:', userData);
+        alert("회원가입 성공");
+        navigate('/');
       } else {
         console.log('회원가입 실패');
       }
@@ -80,11 +87,9 @@ const Login = () => {
               value={loginPassword}
               onChange={(e) => setLoginPassword(e.target.value)}
             />
-            <Link to ="/">
             <button type="button" onClick={handleLogin}>
               로그인
             </button>
-            </Link>
           </>
         ) : (
           <>           
@@ -133,3 +138,4 @@ const Login = () => {
 };
 
 export default Login;
+

@@ -105,9 +105,7 @@ function App() {
           path="/"
           element={
             <>
-            <Link to="/Login">
-              <button className="이건 다른거임">로그인 이동</button>
-            </Link>
+ 
              <Timer />
               <TodoTemplate>
                 <ToDoInsert onInsert={onInsert} />
