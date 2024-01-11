@@ -4,6 +4,7 @@ import ToDoInsert from './components/ToDoInsert';
 import TodoList from './components/TodoList';
 import TodoTemplate from './components/ToDoTemplate';
 import Timer from './components/Timer';
+import './App.css';
 import { BrowserRouter, Routes, Route, Link, useNavigate } from "react-router-dom";
 
 function App() {
@@ -132,4 +133,4 @@ function App() {
   );
 }
 
-export default App;
+export default App

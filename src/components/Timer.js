@@ -2,19 +2,19 @@ import React, { useState, useRef, useEffect } from 'react';
 import './Timer.scss';
 
 const Timer = () => {
-  const [minutes, setMinutes] = useState(0);
-  const [seconds, setSeconds] = useState(0);
   const [inputMinutes, setInputMinutes] = useState(0);
   const [inputSeconds, setInputSeconds] = useState(0);
-  const [isActive, setIsActive] = useState(false);
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(0);
+  const [isTimerRunning, setIsTimerRunning] = useState(false);
   const intervalRef = useRef();
 
   useEffect(() => {
-    if (isActive) {
+    if (isTimerRunning) {
       intervalRef.current = setInterval(() => {
         if (seconds === 0 && minutes === 0) {
           clearInterval(intervalRef.current);
-          setIsActive(false);
+          setIsTimerRunning(false);
         } else {
           if (seconds === 0) {
             setMinutes((prevMinutes) => prevMinutes - 1);
@@ -31,26 +31,26 @@ const Timer = () => {
     return () => {
       clearInterval(intervalRef.current);
     };
-  }, [isActive, minutes, seconds]);
+  }, [isTimerRunning, minutes, seconds]);
 
   const startTimer = () => {
     const totalSeconds = inputMinutes * 60 + inputSeconds;
-    if (totalSeconds > 0 && !isActive) {
+    if (totalSeconds > 0 && !isTimerRunning) {
       setMinutes(inputMinutes);
       setSeconds(inputSeconds);
-      setIsActive(true);
+      setIsTimerRunning(true);
     }
   };
 
   const stopTimer = () => {
-    setIsActive(false);
+    setIsTimerRunning(false);
   };
 
   const resetTimer = () => {
     clearInterval(intervalRef.current);
-    setMinutes(inputMinutes);
-    setSeconds(inputSeconds);
-    setIsActive(false);
+    setMinutes(0);
+    setSeconds(0);
+    setIsTimerRunning(false);
   };
 
   const handleMinutesChange = (event) => {
@@ -67,8 +67,6 @@ const Timer = () => {
     <div className="timer-container">
 
       <div className="timer-display">{`${minutes}:${seconds < 10 ? '0' : ''}${seconds}`}</div>
-      
-      
       <div className="input-container">
         <input
           type="number"
