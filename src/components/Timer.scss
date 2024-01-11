@@ -1,3 +1,16 @@
+.friend {
+
+  width: 39rem;
+  max-width: 375px;
+  border: 1px solid rgb(75, 190, 96); /* 선의 두께와 종류 추가 */
+}
+
+.friend:hover {
+
+  background-color:white;
+  border: 1px solid rgb(75, 190, 96); /* 선의 두께와 종류 추가 */
+}
+
 .timer-container {
   display: flex;
   flex-direction: column;

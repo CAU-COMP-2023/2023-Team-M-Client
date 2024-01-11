@@ -67,16 +67,16 @@ const Timer = () => {
 
   return (
     <>
-    <Link to="/UserSearch">
-    <button className="friend" >
-      <LiaUsersSolid />
-    </button>
-
-  </Link>
+   
 
     <div className="timer-container">
 
- 
+      <Link to="/UserSearch">
+        <button className="friend" >
+          <LiaUsersSolid style={{ width: '2rem', height: '2rem' }}/>
+        </button>
+
+      </Link>
 
       <div className="timer-display">{`${minutes}:${seconds < 10 ? '0' : ''}${seconds}`}</div>
       <div className="input-container">
