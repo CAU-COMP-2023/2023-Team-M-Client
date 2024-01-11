@@ -9,14 +9,14 @@ const UserSearch = () => {
   const handleSearch = () => {
     // Fetch user data from the backend
     fetch(backendURL+'friends/search', {
-      method: 'GET',
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ targetUser: searchInput }),
     })
       .then(response => {
-        if(response.status==(401||200)) //400으로 추후 수정
+        if(response.status==(400||200)) //400으로 추후 수정
           return response.json()
         else 
           throw new Error('Internal server error');
