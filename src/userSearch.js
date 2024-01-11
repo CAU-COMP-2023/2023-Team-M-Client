@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const UserSearch = () => {
   const [searchInput, setSearchInput] = useState('');
   const [searchResult, setSearchResult] = useState('');
   const [userData, setUserData] = useState(null);
+  const [friendList, setFriendList] = useState([]); // 친구 목록 상태 추가
   const backendURL = 'http://comp-backend-env.eba-vujcmart.ap-northeast-2.elasticbeanstalk.com/'; // 백엔드 URL을 적절히 수정하세요
 
   const handleSearch = () => {
@@ -49,10 +50,33 @@ const UserSearch = () => {
       .catch(error => console.error('Error fetching user data:', error));
   };
 
+  useEffect(() => {
+
+    const fetchFriendList = async () => {
+      try {
+        const response = await fetch(backendURL + 'friends/my');
+        if (response.status === 200) {
+          const data = await response.json();
+          setFriendList(data.friendid); // 백엔드에서 전달하는 친구 목록에 따라 수정
+        } else {
+          console.error('Error fetching friend list');
+        }
+      } catch (error) {
+        console.error('Error fetching friend list:', error);
+      }
+    };
+
+    // 검색 결과가 있을 때에만 친구 목록을 불러옴
+    if (userData) {
+      fetchFriendList();
+    }
+  }, [userData, backendURL]);
+
   return (
     <div id="search-container">
       <h2>* 나의 친구 찾기 *</h2>
       <input
+        className='friendInput'
         type="text"
         value={searchInput}
         onChange={(e) => setSearchInput(e.target.value)}
@@ -68,6 +92,14 @@ const UserSearch = () => {
           <button onClick={()=>handleAddFriend(userData)}>친구 추가</button>
         </div>
       )}
+
+
+      <h3>친구 목록</h3>
+        <ul>
+          {friendList.map((friend) => (
+            <li key={friend.user}>{friend.name}</li>
+          ))}
+        </ul>
     </div>
 
   );
