@@ -102,7 +102,7 @@ function App() {
       <Routes>
         
         <Route
-          path="/"
+          path="/home"
           element={
             <>
  
@@ -131,7 +131,7 @@ function App() {
         />
 
 
-        <Route path="/Login" element={<Login />} />
+        <Route path="/" element={<Login />} />
 
         <Route path="/UserSearch" element={<UserSearch/>}/>
       </Routes>

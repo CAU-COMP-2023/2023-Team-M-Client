@@ -30,7 +30,7 @@ const Login = () => {
         const userData = await response.json();
         console.log('로그인 성공:', userData);
 
-        navigate('/');
+        navigate('/home');
       } else {
         console.log('로그인 실패');
         alert("아이디 혹은 비밀번호를 확인하세요");
@@ -54,7 +54,7 @@ const Login = () => {
         const userData = await response.json();
         console.log('회원가입 성공:', userData);
         alert("회원가입 성공");
-        navigate('/');
+        navigate('/home');
       } else {
         console.log('회원가입 실패');
       }
