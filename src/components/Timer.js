@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './Timer.scss';
+import { LiaUsersSolid } from "react-icons/lia";
+import { Link } from "react-router-dom";
 
 const Timer = () => {
   const [inputMinutes, setInputMinutes] = useState(0);
@@ -64,7 +66,17 @@ const Timer = () => {
   };
 
   return (
+    <>
+    <Link to="/UserSearch">
+    <button className="friend" >
+      <LiaUsersSolid />
+    </button>
+
+  </Link>
+
     <div className="timer-container">
+
+ 
 
       <div className="timer-display">{`${minutes}:${seconds < 10 ? '0' : ''}${seconds}`}</div>
       <div className="input-container">
@@ -90,6 +102,8 @@ const Timer = () => {
         <button onClick={resetTimer}>RESET</button>
       </div>
     </div>
+
+    </>
   );
 };
 

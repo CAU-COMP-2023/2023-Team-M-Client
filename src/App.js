@@ -6,7 +6,7 @@ import TodoTemplate from './components/ToDoTemplate';
 import Timer from './components/Timer';
 import { BrowserRouter, Routes, Route, Link, useNavigate } from "react-router-dom";
 import Login from "./Login"
-
+import UserSearch from './UserSearch';
 function App() {
 
 
@@ -130,10 +130,13 @@ function App() {
           }
         />
 
+
         <Route path="/Login" element={<Login />} />
+
+        <Route path="/UserSearch" element={<UserSearch/>}/>
       </Routes>
     </BrowserRouter>
   );
 }
 
-export default App
+export default App;
