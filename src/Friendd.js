@@ -1,64 +1,77 @@
 import React, { useState } from 'react';
 import './Friendd.css';
 
-function App() {
-  const friendData = [
-    { id: 1, name: '친구1', description: '아이디, 이메일' },
-    { id: 2, name: '친구2', description: '아이디, 이메일' },
-  ];
+const UserSearch = () => {
+  const [searchInput, setSearchInput] = useState('');
+  const [searchResult, setSearchResult] = useState('');
+  const [userData, setUserData] = useState(null); 
+ /*const backendURL = 'http://~~'*/
 
-  const [searchTerm, setSearchTerm] = useState('');
+  const handleSearch = () => {
 
-  /*function App() {
-    const [friends, setFriends] = useState([]);
-    const [searchTerm, setSearchTerm] = useState('');
-  
-    useEffect(() => {
-      // 예시 API 호출
-      fetch('https://jsonplaceholder.typicode.com/users')
-        .then(response => response.json())
-        .then(data => // 데이터에서 필요한 정보만 추출하여 저장
-        const formattedData = data.map(({ id, name, email }) => ({
-          id,
-          name,
-          email,
-        }));
-        setFriends(formattedData);
+    /*만약 백엔드 완료되면.. 여기서부터*/
+
+    const dummyUserData = {
+      username: 'User',
+      email: 'user@example.com',
+    };
+
+    setUserData(dummyUserData);
+
+    setSearchResult(`찾은 내용: ${searchInput}`);
+  };
+
+  const handleAddFriend = () => {
+    
+    alert('Friend added!');
+  };
+  /*여기까지 삭제 후*/
+
+  /*아래 내용 입력해보기(작동되는지 확인 필요)
+    fetch(backendUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ query: searchInput }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        // Update state with the received data
+        setUserData(data);
+        setSearchResult(`찾은 내용: ${searchInput}`);
       })
-      .catch(error => console.error('Error fetching data:', error));
-  }, []);
-    */
+      .catch(error => console.error('Error fetching user data:', error));
+  };
 
-  const filteredFriends = friendData.filter((friend) =>
-    friend.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const handleAddFriend = () => {
+    // TODO: Implement friend adding logic
+    alert('Friend added!');
+  };
+  여기까지*/
 
   return (
-    <div className="App">
-      <div id="header">
-        My Friends
-      </div>
+    <div id="search-container">
+      <h2>* 나의 친구 찾기 *</h2>
+      <input
+        type="text"
+        value={searchInput}
+        onChange={(e) => setSearchInput(e.target.value)}
+        placeholder="Enter name or email"
+      />
+      <button onClick={handleSearch}>Search</button>
+      <div id="searchResult">{searchResult}</div>
 
-      <div id="search-bar">
-        <input
-          type="text"
-          placeholder="친구 찾기"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-        <button onClick={() => setSearchTerm('')}>RESET</button>
-      </div>
-
-      <div id="friend-list">
-        {filteredFriends.map((friend) => (
-          <div key={friend.id} className="friend-card">
-            <h2>{friend.name}</h2>
-            <p>{friend.email}</p>
-          </div>
-        ))}
-      </div>
+      {userData && (
+        <div>
+          <h3>사용자 정보</h3>
+          <p>Name: {userData.username}</p>
+          <p>Email: {userData.email}</p>
+          <button onClick={handleAddFriend}>친구 추가</button>
+        </div>
+      )}
     </div>
   );
-}
+};
 
-export default App;
+export default UserSearch;
